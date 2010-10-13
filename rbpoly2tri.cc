@@ -129,7 +129,24 @@ static VALUE
 rb_cdt_triangulate(VALUE self)
 {
   CDTWrap *ptr = XWRAP(self);
-  ptr->cdt->Triangulate();
+
+  /* I have never closely considered what would happen to the stack if I were
+   * to rb_raise (longjmp) while the C++ stack is unwinding.  I'd prefer to 
+   * keep that a mystery.
+   */
+
+  bool err = false;
+
+  try {
+    ptr->cdt->Triangulate();
+  } catch (...) {
+    err = true;
+  }
+
+  if (err) {
+    rb_raise(rb_eRuntimeError, "Couldnt triangulate (collinear points?)");
+  }
+
   return Qnil;
 }
 

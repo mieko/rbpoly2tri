@@ -8,12 +8,6 @@ of the poly2tri C++ branch.  Both poly2tri and rbpoly2tri are available under
 BSD/MIT-style permissive licenses.  See poly2tri/LICENSE and LICENSE for
 details.
 
-*Note:* As of now, poly2tri assumes you're pretty hardcore and does assert-style
-error checking.  If you feed rbpoly2tri a polygon with coincident/collinear 
-points *it will crash*, because asserts have been disabled.  I'm working with 
-poly2tri to see if this can be changed upstream, but if not, expect this issue 
-resolved in the bindings copy soon.
-
 [poly2tri Homepage](http://code.google.com/p/poly2tri)
 
 To install:
