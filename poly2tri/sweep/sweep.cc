@@ -738,6 +738,10 @@ void Sweep::FlipEdgeEvent(SweepContext& tcx, Point& ep, Point& eq, Triangle* t, 
     }
   } else {
     Point& newP = NextFlipPoint(ep, eq, ot, op);
+    if (&newP== 0) {
+      return;
+    }
+
     FlipScanEdgeEvent(tcx, ep, eq, *t, ot, newP);
     EdgeEvent(tcx, ep, eq, t, p);
   }
@@ -773,6 +777,8 @@ Point& Sweep::NextFlipPoint(Point& ep, Point& eq, Triangle& ot, Point& op)
     // Left
     return *ot.PointCW(op);
   } else{
+    /* Huge hack.  Too many ptr-ref confusions in this code */
+    return *((Point*)(0));
     //throw new RuntimeException("[Unsupported] Opposing point on constrained edge");
     assert(0);
   }
@@ -782,7 +788,15 @@ void Sweep::FlipScanEdgeEvent(SweepContext& tcx, Point& ep, Point& eq, Triangle&
                               Triangle& t, Point& p)
 {
   Triangle& ot = t.NeighborAcross(p);
+  if(&ot == NULL) {
+    return;
+  }
+  
   Point& op = *ot.OppositePoint(t, p);
+
+  if(&op == NULL) {
+    return;
+  }
 
   if (&t.NeighborAcross(p) == NULL) {
     // If we want to integrate the fillEdgeEvent do it here
