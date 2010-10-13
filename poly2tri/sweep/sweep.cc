@@ -51,7 +51,7 @@ void Sweep::SweepPoints(SweepContext& tcx)
   for (int i = 1; i < tcx.point_count(); i++) {
     Point& point = *tcx.GetPoint(i);
     Node* node = &PointEvent(tcx, point);
-    for (size_t i = 0; i < point.edge_list.size(); i++) {
+    for (int i = 0; i < point.edge_list.size(); i++) {
       EdgeEvent(tcx, point.edge_list[i], node);
     }
   }
@@ -738,10 +738,6 @@ void Sweep::FlipEdgeEvent(SweepContext& tcx, Point& ep, Point& eq, Triangle* t, 
     }
   } else {
     Point& newP = NextFlipPoint(ep, eq, ot, op);
-    if (&newP== 0) {
-      return;
-    }
-
     FlipScanEdgeEvent(tcx, ep, eq, *t, ot, newP);
     EdgeEvent(tcx, ep, eq, t, p);
   }
@@ -777,8 +773,6 @@ Point& Sweep::NextFlipPoint(Point& ep, Point& eq, Triangle& ot, Point& op)
     // Left
     return *ot.PointCW(op);
   } else{
-    /* Huge hack.  Too many ptr-ref confusions in this code */
-    return *((Point*)(0));
     //throw new RuntimeException("[Unsupported] Opposing point on constrained edge");
     assert(0);
   }
@@ -788,15 +782,7 @@ void Sweep::FlipScanEdgeEvent(SweepContext& tcx, Point& ep, Point& eq, Triangle&
                               Triangle& t, Point& p)
 {
   Triangle& ot = t.NeighborAcross(p);
-  if(&ot == NULL) {
-    return;
-  }
-  
   Point& op = *ot.OppositePoint(t, p);
-
-  if(&op == NULL) {
-    return;
-  }
 
   if (&t.NeighborAcross(p) == NULL) {
     // If we want to integrate the fillEdgeEvent do it here
@@ -824,7 +810,7 @@ void Sweep::FlipScanEdgeEvent(SweepContext& tcx, Point& ep, Point& eq, Triangle&
 Sweep::~Sweep() {
 
     // Clean up memory
-    for(size_t i = 0; i < nodes_.size(); i++) {
+    for(int i = 0; i < nodes_.size(); i++) {
         delete nodes_[i];
     }
 

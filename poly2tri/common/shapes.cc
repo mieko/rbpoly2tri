@@ -29,10 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "shapes.h"
-
-#ifndef NDEBUG
-# include <iostream>
-#endif
+#include <iostream>
 
 namespace p2t {
 
@@ -325,7 +322,6 @@ Triangle& Triangle::NeighborAcross(Point& opoint)
   return *neighbors_[2];
 }
 
-#ifndef NDEBUG
 void Triangle::DebugPrint()
 {
   using namespace std;
@@ -333,7 +329,6 @@ void Triangle::DebugPrint()
   cout << points_[1]->x << "," << points_[1]->y << " ";
   cout << points_[2]->x << "," << points_[2]->y << endl;
 }
-#endif
 
 }
 

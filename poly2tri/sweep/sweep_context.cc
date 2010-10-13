@@ -47,7 +47,7 @@ SweepContext::SweepContext(std::vector<Point*> polyline)
 void SweepContext::AddHole(std::vector<Point*> polyline)
 {
   InitEdges(polyline);
-  for(size_t i = 0; i < polyline.size(); i++) {
+  for(int i = 0; i < polyline.size(); i++) {
     points_.push_back(polyline[i]);
   }
 }
@@ -56,7 +56,7 @@ void SweepContext::AddPoint(Point* point) {
   points_.push_back(point);
 }
 
-const std::vector<Triangle*>& SweepContext::GetTriangles()
+std::vector<Triangle*> SweepContext::GetTriangles()
 {
   return triangles_;
 }
@@ -72,7 +72,7 @@ void SweepContext::InitTriangulation()
   double ymax(points_[0]->y), ymin(points_[0]->y);
 
   // Calculate bounds.
-  for (size_t i = 0; i < points_.size(); i++) {
+  for (int i = 0; i < points_.size(); i++) {
     Point& p = *points_[i];
     if (p.x > xmax)
       xmax = p.x;
@@ -192,7 +192,7 @@ SweepContext::~SweepContext()
         delete ptr;
     }
 
-     for(size_t i = 0; i < edge_list.size(); i++) {
+     for(int i = 0; i < edge_list.size(); i++) {
         delete edge_list[i];
     }
 

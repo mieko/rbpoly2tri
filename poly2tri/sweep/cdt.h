@@ -53,7 +53,7 @@ void AddPoint(Point* point);
 /// Triangulate points
 void Triangulate();
 /// Get Delaunay triangles
-const std::vector<Triangle*>& GetTriangles();
+std::vector<Triangle*> GetTriangles();
 /// Get triangle map
 std::list<Triangle*> GetMap();
 

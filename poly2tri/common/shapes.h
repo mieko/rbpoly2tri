@@ -35,7 +35,7 @@
 
 #include <vector>
 #include <cstddef>
-#include <cassert>
+#include <assert.h>
 #include <cmath>
 
 namespace p2t {
@@ -198,11 +198,7 @@ inline void IsInterior(bool b);
 
 Triangle& NeighborAcross(Point& opoint);
 
-#ifndef NDEBUG
-  void DebugPrint();
-#else
-  inline void DebugPrint() {} 
-#endif
+void DebugPrint();
 
 private:
 
