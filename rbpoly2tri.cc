@@ -144,7 +144,7 @@ rb_cdt_triangulate(VALUE self)
   }
 
   if (err) {
-    rb_raise(rb_eRuntimeError, "Couldnt triangulate (collinear points?)");
+    rb_raise(rb_eRuntimeError, "Couldnt triangulate (duplicate vertices?)");
   }
 
   return Qnil;
