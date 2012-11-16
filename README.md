@@ -10,15 +10,18 @@ details.
 
 [poly2tri Homepage](http://code.google.com/p/poly2tri)
 
-To install:
+To install via RubyGems:
 
-    ruby ./extconf.rb
-    make
-    make install
+    gem install rbpoly2tri
+
+To install from repo:
+
+    gem build rbpoly2tri.gemspec
+    gem install rbpoly2tri-<version>.gem
 
 Simple Usage:
 ===========
-    require 'poly2tri'
+    require 'rbpoly2tri'
 
     # The initial input must be simple (non-intersecting, no holes), and
     # repeated vertices are not allowed.  Holes may be added later.
