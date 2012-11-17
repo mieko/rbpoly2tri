@@ -1,4 +1,4 @@
-#include "poly2tri/poly2tri.h"
+#include "../poly2tri/poly2tri.h"
 #include <ruby.h>
 
 using namespace p2t;
@@ -180,7 +180,7 @@ rb_cdt_get_triangles(VALUE self)
 
 typedef VALUE(*rubymethod)(...);
 
-void Init_poly2tri()
+void Init_rbpoly2tri()
 {
   VALUE m = rb_define_module("Poly2Tri");
 
