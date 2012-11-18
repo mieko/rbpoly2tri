@@ -6,11 +6,11 @@ $defs.push "-DNDEBUG -I#{abs_root}/throw_assert -isystem #{abs_root}/throw_asser
 
 # Collect all the poly2tri sources
 $srcs = %w(rbpoly2tri.cc)
-$srcs += Dir["./poly2tri/common/*.cc"]
-$srcs += Dir["./poly2tri/sweep/*.cc"]
+$srcs += Dir["../poly2tri/common/*.cc"]
+$srcs += Dir["../poly2tri/sweep/*.cc"]
 
 $objs = $srcs.map{|src| src.gsub(/\.cc$/, '.o')}
 
 $cleanfiles = $objs
 
-create_makefile('poly2tri')
+create_makefile('rbpoly2tri/rbpoly2tri')
